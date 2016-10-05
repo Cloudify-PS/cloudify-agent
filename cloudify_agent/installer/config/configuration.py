@@ -21,7 +21,6 @@ from cloudify import ctx
 from cloudify import context
 from cloudify import constants
 from cloudify.utils import get_manager_ip
-from cloudify.utils import get_manager_file_server_url
 
 from cloudify import utils as cloudify_utils
 from cloudify_agent.api import utils
