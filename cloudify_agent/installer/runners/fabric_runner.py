@@ -38,6 +38,7 @@ COMMON_ENV = {
     'warn_only': True,
     'forward_agent': True,
     'abort_on_prompts': True,
+    'abort_exception': Exception,
     'disable_known_hosts': True
 }
 
