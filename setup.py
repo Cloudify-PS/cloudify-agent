@@ -18,7 +18,7 @@ from setuptools import setup
 
 install_requires = [
     'cloudify-plugins-common==4.0.1.post1',
-    'cloudify-rest-client==4.0.1',
+    'cloudify-rest-client==4.0.1.post1',
     'cloudify-script-plugin==1.4.post1',
     'appdirs==1.4.3',
     'click==4.0',
