@@ -32,7 +32,7 @@ from cloudify.context import BootstrapContext
 from cloudify.constants import SECURED_PROTOCOL
 from cloudify.workflows import tasks as workflows_tasks
 
-from cloudify.utils import setup_logger, get_tempdir
+from cloudify.utils import setup_logger, get_exec_tempdir
 
 from cloudify_rest_client import CloudifyClient
 
@@ -368,8 +368,9 @@ def content_to_file(content, file_path=None, executable=False):
     """
 
     if not file_path:
+        tempdir = get_exec_tempdir() if executable else tempfile.gettempdir()
         file_path = tempfile.NamedTemporaryFile(mode='w', delete=False,
-                                                dir=get_tempdir(executable)).name
+                                                dir=tempdir).name
     with open(file_path, 'w') as f:
         f.write(content)
         f.write(os.linesep)
@@ -434,8 +435,7 @@ def get_python_path():
     return get_executable_path('python')
 
 
-def env_to_file(env_variables, destination_path=None, posix=True,
-                executable=False):
+def env_to_file(env_variables, destination_path=None, posix=True):
 
     """
     Write environment variables to a file.
@@ -453,8 +453,7 @@ def env_to_file(env_variables, destination_path=None, posix=True,
     if not env_variables:
         return None
     if not destination_path:
-        destination_path = tempfile.mkstemp(suffix='env',
-                                            dir=get_tempdir(executable))[1]
+        destination_path = tempfile.mkstemp(suffix='env')[1]
 
     if posix:
         linesep = '\n'
